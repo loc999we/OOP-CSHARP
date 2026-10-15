@@ -6,35 +6,38 @@ namespace Bai2Module3
     {
         static void Main(string[] args)
         {
-            List<Sach> books = new List<Sach>();
+            Console.InputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
+            List<Sach> dsSach = new List<Sach>()
             {
-                books.Add(new SachGiaoKhoa("SGK01", new DateTime(2023, 3, 10), 25_000, 100, "Giao Duc", TinhTrangSach.Sach_Moi));
-                books.Add(new SachGiaoKhoa("SGK02", new DateTime(2022, 8, 20), 30_000, 50, "Giao Duc", TinhTrangSach.Sach_Cu));
-                books.Add(new SachGiaoKhoa("SGK03", new DateTime(2023, 1, 5), 18_000, 200, "Kim Dong", TinhTrangSach.Sach_Moi));
-
-                books.Add(new SachThamKhao("STK01", new DateTime(2023, 5, 15), 60_000, 40, "Tre", 15_000));
-                books.Add(new SachThamKhao("STK02", new DateTime(2022, 11, 2), 85_000, 20, "Giao Duc", 25_000));
-                books.Add(new SachThamKhao("STK03", new DateTime(2023, 6, 30), 45_000, 60, "Kim Dong", 10_000));
+                new SachGiaoKhoa(TinhTrang.Cu,"SGK01",new DateTime(2026,12,5),50000,200,"Kim Đồng"),
+                new SachGiaoKhoa(TinhTrang.Cu,"SGK02",new DateTime(2026,11,5),55000,180,"Tuổi Trẻ"),
+                new SachGiaoKhoa(TinhTrang.Moi,"SGK03",new DateTime(2026,10,5),55000,180,"UEH"),
+            
+                new SachThamKhao(10/100,"STK01",new DateTime(2026,9,5),55000,180,"UEH"),
+                new SachThamKhao(15/100,"STK02",new DateTime(2026,9,5),45000,100,"Kim Đồng"),
+                new SachThamKhao(12/100,"STK03",new DateTime(2026,9,5),50000,120,"Tuổi Trẻ"),
+            };
+            
+            // Thành Tiền Cho Từng Loại
+            double tienSGK = 0;
+            double tienSTK = 0;
+            foreach (Sach s in dsSach)
+            {
+                tienSGK += s.ThanhTien();
+                tienSTK += s.ThanhTien();
             }
-            ;
-            decimal tienSGK = 0, tienSTK = 0;
-            foreach (var book in books)
+            Console.WriteLine("Thành Tiền SGK:"+tienSGK);
+            Console.WriteLine("Thành Tiền STK:" + tienSTK);
+            
+            Console.WriteLine("Nhập tên NXB:");
+            
+            string nxb = Console.ReadLine();
+            foreach (Sach x in dsSach)
             {
-                Console.Write(book);
-                Console.WriteLine($", Thanh tien: {book.TinhThanhTien()}");
-                if (book is SachGiaoKhoa)
-                    tienSGK += book.TinhThanhTien();
-                else
-                    tienSTK += book.TinhThanhTien();
-            }
-
-            Console.Write("Nhập tên NXB:");
-            string nxb = Console.ReadLine()!;
-            foreach (var book in books)
-            {
-                if (string.Equals(book.NhaXuatBan, nxb, StringComparison.OrdinalIgnoreCase))
+                if (x.NhaXuatBan.Equals (nxb,StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine(book);
+                    Console.WriteLine(x.ToString());
                 }
             }
         }
