@@ -15,11 +15,6 @@
             DoanhThu = doanhThu;
         }
 
-        public virtual double TinhDoanhThu()
-        {
-            return DoanhThu;
-        }
-
         public override string ToString()
         {
             return $"Mã chuyến: {MaSoChuyen}, " +
